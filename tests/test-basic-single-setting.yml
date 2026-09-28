@@ -1,0 +1,33 @@
+name: Test basic single setting extraction
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install atmos
+        run: |
+          curl -sSL https://github.com/cloudposse/atmos/releases/download/v1.170.0/atmos_1.170.0_linux_amd64 -o /usr/local/bin/atmos
+          chmod +x /usr/local/bin/atmos
+          atmos version
+
+      - id: action
+        uses: .
+        with:
+          component: foo
+          stack: core-ue1-dev
+          settings-path: settings.level1.level2.level3.secrets-arn
+
+      - name: Assert value output is the secrets ARN
+        env:
+          ACTUAL: ${{ steps.action.outputs.value }}
+        run: |
+          echo "actual: $ACTUAL"
+          EXPECTED="arn:aws:secretsmanager:us-east-1:000000000000:secret:MySecret-PlMes3"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "FAIL: expected '$EXPECTED' but got '$ACTUAL'"
+            exit 1
+          fi
+          echo "PASS"

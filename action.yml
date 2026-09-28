@@ -1,0 +1,36 @@
+name: "GitHub Action for Extracting Atmos Settings"
+description: "A GitHub Action for Extracting Atmos Settings from Metadata"
+author: hello@cloudposse.com
+branding:
+  icon: "terminal"
+  color: "white"
+inputs:
+  component:
+    description: The atmos component extract the settings for.
+    required: false
+  stack:
+    description: The atmos stack extract the settings for.
+    required: false
+  settings-path:
+    description: The settings path using JSONPath expressions.
+    required: false
+  settings:
+    description: The settings to extract.
+    required: false
+  process-templates:
+    description: "Enable/disable processing of Go templates in Atmos stacks manifests."
+    required: false
+    default: "true"
+  process-functions:
+    description: "Enable/disable processing of Terraform functions in Atmos stacks manifests."
+    required: false
+    default: "true"
+outputs:
+  value:
+    description: "The value of the setting when a single setting is returned."
+  settings:
+    description: "The settings values when multiple settings are returned."
+runs:
+  pre: chainguard-phonehome.js
+  using: "node24"
+  main: "dist/index.js"
