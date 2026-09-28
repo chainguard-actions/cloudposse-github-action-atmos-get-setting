@@ -1,0 +1,1 @@
+# cloudposse-github-action-atmos-get-setting
