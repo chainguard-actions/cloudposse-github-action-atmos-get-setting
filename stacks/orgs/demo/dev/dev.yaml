@@ -1,0 +1,15 @@
+# Test basic use
+components:
+  terraform:
+    foo:
+      settings:
+        level1:
+          level2:
+            level3:
+              secrets-arn: "arn:aws:secretsmanager:us-east-1:000000000000:secret:MySecret-PlMes3"
+      vars:
+        namespace: demo
+        tenant: core
+        environment: ue1
+        stage: dev
+        foo: bar

@@ -1,0 +1,36 @@
+name: Test process-templates enabled
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install atmos
+        uses: cloudposse/github-action-setup-atmos@60878d48037763f759aedee74e9cc0c2dc88e9ec # v3.5.0
+        with:
+          install-wrapper: false
+
+      - id: action
+        uses: .
+        env:
+          ATMOS_CLI_CONFIG_PATH: ${{ github.workspace }}/tests/fixtures
+          ATMOS_BASE_PATH: ${{ github.workspace }}/tests/fixtures
+        with:
+          component: hello
+          stack: core-ue1-dev
+          settings-path: settings.level1.example
+          process-templates: "true"
+
+      - name: Assert template was rendered
+        env:
+          ACTUAL: ${{ steps.action.outputs.value }}
+        run: |
+          echo "actual: $ACTUAL"
+          # When templates are enabled, the Go template should be rendered to "core-ue1-dev"
+          if [ "$ACTUAL" != "core-ue1-dev" ]; then
+            echo "FAIL: expected 'core-ue1-dev' (rendered template) but got '$ACTUAL'"
+            exit 1
+          fi
+          echo "PASS"

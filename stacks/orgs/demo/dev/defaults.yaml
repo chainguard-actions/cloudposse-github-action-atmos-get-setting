@@ -1,0 +1,17 @@
+# Test use of atmos default settings with component settings
+settings:
+  level1:
+    example: default
+
+components:
+  terraform:
+    test-defaults:
+      settings:
+        level1:
+          example: result
+      vars:
+        namespace: demo
+        tenant: core
+        environment: ue1
+        stage: dev
+        foo: bar
