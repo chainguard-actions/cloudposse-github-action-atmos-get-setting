@@ -9,6 +9,7 @@ Hardened by [Chainguard](https://www.chainguard.dev) from the upstream action at
 | Version | Tag | Upstream commit |
 |---------|-----|-----------------|
 | v2.0.3 | [`v2.0.3`](https://github.com/chainguard-actions/cloudposse-github-action-atmos-get-setting/tree/v2.0.3) | [`4b1fa78`](https://github.com/cloudposse/github-action-atmos-get-setting/commit/4b1fa78a8aaea6aa55733e473bf5e0a8533f24b3) |
+| v2.1.0 | [`v2.1.0`](https://github.com/chainguard-actions/cloudposse-github-action-atmos-get-setting/tree/v2.1.0) | [`45ea80b`](https://github.com/cloudposse/github-action-atmos-get-setting/commit/45ea80b66308a31efd8014aa3aaf6e2f4862cb76) |
 
 ## Privacy
 
